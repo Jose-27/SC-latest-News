@@ -1,13 +1,3 @@
-// Copyright (c) 2014 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-/**
- * Get the current URL.
- *
- * @param {function(string)} callback - called when the URL of the current tab
- *   is found.
- */
 function getCurrentTabUrl(callback) {
   // Query filter to be passed to chrome.tabs.query - see
   // https://developer.chrome.com/extensions/tabs#method-query
@@ -36,15 +26,6 @@ function getCurrentTabUrl(callback) {
 
     callback(url);
   });
-
-  // Most methods of the Chrome extension APIs are asynchronous. This means that
-  // you CANNOT do something like this:
-  //
-  // var url;
-  // chrome.tabs.query(queryInfo, function(tabs) {
-  //   url = tabs[0].url;
-  // });
-  // alert(url); // Shows "undefined", because chrome.tabs.query is async.
 }
 
 /**
@@ -55,15 +36,13 @@ function getCurrentTabUrl(callback) {
  *   The callback gets a string that describes the failure reason.
  */
 function getImageUrl(searchTerm, callback, errorCallback) {
-  // Google image search - 100 searches per day.
-  // https://developers.google.com/image-search/
   var searchUrl = 'http://rss.sciam.com/ScientificAmerican-Global';
-  var x = new XMLHttpRequest();
-  x.open('GET', searchUrl);
-  
-  x.onload = function() {
+  var _request = new XMLHttpRequest();
+  _request.open('GET', searchUrl);
+
+  _request.onload = function() {
     // Parse and process the response from Google Image Search.
-    var response = x.response;
+    var response = _request.response;
 
     if (!response || response.length === 0) {
       errorCallback('No response from Google Image search!');
@@ -75,10 +54,10 @@ function getImageUrl(searchTerm, callback, errorCallback) {
     var imageUrl = firstResult;
     callback(imageUrl);
   };
-  x.onerror = function() {
+  _request.onerror = function() {
     errorCallback('Network error.');
   };
-  x.send();
+  _request.send();
 }
 
 function renderStatus(statusText) {
@@ -91,26 +70,29 @@ function myFunction(xml) {
 }
 
 
-function loadData(xml){
-    
+function loadData(xml) {
+
     var tt = document.createElement('div');
     tt.innerHTML = xml;
-    var items=tt.getElementsByTagName('item');
-    var title, desc, thumb, swf;
+    var items = tt.getElementsByTagName('item');
     var statusDiv = document.getElementById('status');
-    
+
     for(var i=0; i < items.length; i++){
-		//alert('in the loop');
-        console.log(items);
-        var anchor = document.createElement('a');
-        var br = document.createElement('br');
+        var newsList = document.createElement('LI');
+        var anchor = document.createElement('A');
         var tt = items[i].getElementsByTagName('link')[0].textContent;
-        anchor.href = '';
-        anchor.appendChild(br);
         var textnode = document.createTextNode(items[i].getElementsByTagName('title')[0].textContent);
+
+        newsList.className = 'newsList';
+        /*
+        *   TO-DO make sure to have a dynamic url
+        */
+        anchor.href = "https://www.scientificamerican.com/";
+        anchor.target = "_blank";
         anchor.appendChild(textnode);
-        statusDiv.appendChild(anchor);
-    
+        newsList.appendChild(anchor);
+        statusDiv.appendChild(newsList);
+
 	}
 
 }
@@ -121,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
 
     getImageUrl(url, function(xml) {
-        
+
        loadData(xml);
 
     }, function(errorMessage) {
@@ -130,4 +112,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-

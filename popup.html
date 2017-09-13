@@ -2,25 +2,15 @@
 
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
-    <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
-      }
-      #status {
-        /* avoid an excessively wide status text */
-        width: 400px;
-        height:300px;
-      }
-    </style>
-
-
-    <script src="popup.js"></script>
+    <title>Scientific American Latest News</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
   </head>
   <body>
-    <div id="status"></div>
+    <div class="main__newsList--wrapper">
+        <img src="icon__logo--lg.png"/>
+        <ol id="status"></ol>
+    </div>
+
+    <script type="text/javascript" src="main.js"></script>
   </body>
 </html>
-
-
