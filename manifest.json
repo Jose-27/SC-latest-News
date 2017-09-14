@@ -6,7 +6,7 @@
   "version": "1.0",
 
   "browser_action": {
-    "default_icon": "favicon-32.png",
+    "default_icon": "img/favicon-32.png",
     "default_popup": "popup.html",
     "default_title": "Scientific American"
   },
