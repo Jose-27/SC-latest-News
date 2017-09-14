@@ -17,3 +17,5 @@ Extensions that you download from the Chrome Web Store are packaged up as ```.cr
   
 **You can also:**
   - Alternatively, you can drag and drop the directory where your extension files live onto `chrome://extensions` in your browser to load it. If the extension is valid, it'll be loaded up and active right away! If it's invalid, an error message will be displayed at the top of the page. Correct the error, and try again.
+
+![Alt text](/SC-latest-News/blob/master/img/sciam.png?raw=true "Optional Title")
