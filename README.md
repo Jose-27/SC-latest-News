@@ -1,6 +1,7 @@
 # Scientific American Latest News Chrome Extension
 
-[![N|Solid](http://www.immunomix.com/wp-content/uploads/2017/06/Scientific-American-Logo.png)](https://nodesource.com/products/nsolid)
+[![N|Solid](http://www.immunomix.com/wp-content/uploads/2017/06/Scientific-American-Logo.png)](https://nodesource.com/products/nsolid) [![Build Status](https://travis-ci.org/{ORG-or-USERNAME}/{REPO-NAME}.png?branch=master)](https://travis-ci.org/{ORG-or-USERNAME}/{REPO-NAME})
+
 
 Extensions that you download from the Chrome Web Store are packaged up as ```.crx``` files, which is great for distribution, but not so great for development. Recognizing this, Chrome gives you a quick way of loading up your working directory for testing. Let's do that now..
 
