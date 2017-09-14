@@ -8,7 +8,7 @@
 
 Extensions that you download from the Chrome Web Store are packaged up as ```.crx``` files, which is great for distribution, but not so great for development. Recognizing this, Chrome gives you a quick way of loading up your working directory for testing. Let's do that now..
 
-# Load the extension 
+# Load the extension [![HitCount](http://hits.dwyl.io/jose-27/SC-latest-News.svg)](http://hits.dwyl.io/jose-27/SC-latest-News)
 
   1. Copy and paste this(`chrome://extensions`) in your chrome search box.
   2. Ensure that the **Developer mode checkbox** in the top right-hand corner is checked.
