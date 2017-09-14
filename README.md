@@ -1,4 +1,5 @@
-# Scientific American Latest News Chrome Extension [![Build Status](https://travis-ci.org/{ORG-or-USERNAME}/{REPO-NAME}.png?branch=master)](https://travis-ci.org/{ORG-or-USERNAME}/{REPO-NAME})
+# Scientific American Latest News Chrome Extension ## Contributing [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+
 
 
 [![N|Solid](http://www.immunomix.com/wp-content/uploads/2017/06/Scientific-American-Logo.png)](https://nodesource.com/products/nsolid)
