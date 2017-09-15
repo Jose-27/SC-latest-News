@@ -59,14 +59,14 @@ function renderStatus(statusText) {
 }
 
 function loadData(xml) {
-    var tt = document.createElement('div');
+    var tt = _crElement('div');
     tt.innerHTML = xml;
     var items = tt.getElementsByTagName('item');
     var statusDiv = document.getElementById('status');
 
     for(var i=0; i < items.length; i++){
-        var newsList = document.createElement('LI');
-        var anchor = document.createElement('A');
+        var newsList = _crElement('LI');
+        var anchor = _crElement('A');
             tt = items[i].getElementsByTagName('link')[0];
         var textnode = document.createTextNode(items[i].getElementsByTagName('title')[0].textContent);
         newsList.className = 'newsList';
