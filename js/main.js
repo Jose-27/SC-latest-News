@@ -43,7 +43,7 @@ function getImageUrl(searchTerm, callback, errorCallback) {
   _request.onload = function() {
     // Parse and process the response from Google Image Search.
     var response = _request.response;
-
+    1
     if (!response || response.length === 0) {
       errorCallback('No response from Google Image search!');
       return;
@@ -60,34 +60,22 @@ function getImageUrl(searchTerm, callback, errorCallback) {
   _request.send();
 }
 
-function renderStatus(statusText) {
-  document.getElementById('status').textContent = statusText;
-}
-
-function myFunction(xml) {
-    var xmlDoc = xml;
-    document.getElementById("status").innerHTML =xmlDoc;
-}
-
-
 function loadData(xml) {
 
-    var tt = document.createElement('div');
-    tt.innerHTML = xml;
-    var items = tt.getElementsByTagName('item');
-    var statusDiv = document.getElementById('status');
+    var xmlContent = document.createElement('div').innerHTML = xml;
+    var items = xmlContent.getElementsByTagName('item');
+    var statusDiv = _getElem('newsList');
 
     for(var i=0; i < items.length; i++){
+
         var newsList = document.createElement('LI');
         var anchor = document.createElement('A');
-        var tt = items[i].getElementsByTagName('link')[0].textContent;
+        var get_link_url = items[i].getElementsByTagName('link')[0];
         var textnode = document.createTextNode(items[i].getElementsByTagName('title')[0].textContent);
 
+        
         newsList.className = 'newsList';
-        /*
-        *   TO-DO make sure to have a dynamic url
-        */
-        anchor.href = "https://www.scientificamerican.com/";
+        anchor.href = get_link_url.nextSibling.data;
         anchor.target = "_blank";
         anchor.appendChild(textnode);
         newsList.appendChild(anchor);
