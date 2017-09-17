@@ -18,12 +18,6 @@ function getCurrentTabUrl(callback) {
     // See https://developer.chrome.com/extensions/tabs#type-Tab
     var url = tab.url;
 
-    // tab.url is only available if the "activeTab" permission is declared.
-    // If you want to see the URL of other tabs (e.g. after removing active:true
-    // from |queryInfo|), then the "tabs" permission is required to see their
-    // "url" properties.
-    console.assert(typeof url == 'string', 'tab.url should be a string');
-
     callback(url);
   });
 }
@@ -60,20 +54,22 @@ function getImageUrl(searchTerm, callback, errorCallback) {
   _request.send();
 }
 
+
 function loadData(xml) {
 
-    var xmlContent = document.createElement('div').innerHTML = xml;
+    var xmlContent = document.createElement('div');
+    xmlContent.innerHTML = xml;
+
     var items = xmlContent.getElementsByTagName('item');
     var statusDiv = _getElem('newsList');
 
     for(var i=0; i < items.length; i++){
 
-        var newsList = document.createElement('LI');
-        var anchor = document.createElement('A');
-        var get_link_url = items[i].getElementsByTagName('link')[0];
-        var textnode = document.createTextNode(items[i].getElementsByTagName('title')[0].textContent);
+        var newsList = document.createElement('LI'),
+            anchor = document.createElement('A'),
+            get_link_url = items[i].getElementsByTagName('link')[0],
+            textnode = document.createTextNode(items[i].getElementsByTagName('title')[0].textContent);
 
-        
         newsList.className = 'newsList';
         anchor.href = get_link_url.nextSibling.data;
         anchor.target = "_blank";
@@ -82,10 +78,7 @@ function loadData(xml) {
         statusDiv.appendChild(newsList);
 
 	}
-
 }
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
