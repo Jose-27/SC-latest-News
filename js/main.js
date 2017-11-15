@@ -37,7 +37,7 @@ function getImageUrl(searchTerm, callback, errorCallback) {
   _request.onload = function() {
     // Parse and process the response from Google Image Search.
     var response = _request.response;
-    1
+
     if (!response || response.length === 0) {
       errorCallback('No response from Google Image search!');
       return;
@@ -61,17 +61,17 @@ function loadData(xml) {
     xmlContent.innerHTML = xml;
 
     var items = xmlContent.getElementsByTagName('item');
-    var statusDiv = _getElem('newsList');
+    var statusDiv = getElem('newsList');
 
     for(var i=0; i < items.length; i++){
 
-        var newsList = document.createElement('LI'),
-            anchor = document.createElement('A'),
-            get_link_url = items[i].getElementsByTagName('link')[0],
+        var anchor = document.createElement('A'),
+            getLinkUrl = items[i].getElementsByTagName('link')[0],
+            newsList = document.createElement('LI'),
             textnode = document.createTextNode(items[i].getElementsByTagName('title')[0].textContent);
 
         newsList.className = 'newsList';
-        anchor.href = get_link_url.nextSibling.data;
+        anchor.href = getLinkUrl.nextSibling.data;
         anchor.target = "_blank";
         anchor.appendChild(textnode);
         newsList.appendChild(anchor);
@@ -80,13 +80,17 @@ function loadData(xml) {
 	}
 }
 
+function renderStatus (statusText) {
+  getElem('newsList').textContent = statusText;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
 
     getImageUrl(url, function(xml) {
 
        loadData(xml);
-
+       console.log('ss');
     }, function(errorMessage) {
 
       renderStatus('Cannot display image. ' + errorMessage);
