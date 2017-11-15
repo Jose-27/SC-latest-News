@@ -29,7 +29,7 @@ function getCurrentTabUrl(callback) {
  * @param {function(string)} errorCallback - Called when the image is not found.
  *   The callback gets a string that describes the failure reason.
  */
-function getImageUrl(searchTerm, callback, errorCallback) {
+function getSciamNews(searchTerm, callback, errorCallback) {
   var searchUrl = 'http://rss.sciam.com/ScientificAmerican-Global';
   var _request = new XMLHttpRequest();
   _request.open('GET', searchUrl);
@@ -59,22 +59,23 @@ function loadData(xml) {
 
     var xmlContent = document.createElement('div');
     xmlContent.innerHTML = xml;
-
     var items = xmlContent.getElementsByTagName('item');
     var statusDiv = getElem('newsList');
 
     for(var i=0; i < items.length; i++){
-
         var anchor = document.createElement('A'),
             getLinkUrl = items[i].getElementsByTagName('link')[0],
             newsList = document.createElement('LI'),
+            pubDate = document.createElement('SPAN'),
             textnode = document.createTextNode(items[i].getElementsByTagName('title')[0].textContent);
 
         newsList.className = 'newsList';
         anchor.href = getLinkUrl.nextSibling.data;
         anchor.target = "_blank";
+        pubDate.innerHTML = '&nbsp;' + moment(items[i].getElementsByTagName('pubDate')[0].textContent).startOf('hour').fromNow();
         anchor.appendChild(textnode);
         newsList.appendChild(anchor);
+        newsList.appendChild(pubDate);
         statusDiv.appendChild(newsList);
 
 	}
@@ -86,13 +87,9 @@ function renderStatus (statusText) {
 
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
-
-    getImageUrl(url, function(xml) {
-
+    getSciamNews(url, function(xml) {
        loadData(xml);
-       console.log('ss');
     }, function(errorMessage) {
-
       renderStatus('Cannot display image. ' + errorMessage);
     });
   });

@@ -10,15 +10,13 @@ body {
     padding: 10px 0;
     list-style-type: decimal;
 }
-.newsList:first-child::after{
-    content: "Latest News";
-    color: red;
-    font-size: 0.7em;
-    margin-left: 10px;
-}
 img{
     display: block;
     margin: 0 auto;
     height:40px;
     width: 150px;
+}
+.newsList > span{
+    font-size: small;
+    color: #e80000;
 }
