@@ -66,14 +66,13 @@ function loadData(xml) {
         var anchor = document.createElement('A'),
             getLinkUrl = items[i].getElementsByTagName('link')[0],
             newsList = document.createElement('LI'),
-            pubDate = document.createElement('SPAN'),
-            textnode = document.createTextNode(items[i].getElementsByTagName('title')[0].textContent);
+            pubDate = document.createElement('SPAN');
 
         newsList.className = 'newsList';
         anchor.href = getLinkUrl.nextSibling.data;
         anchor.target = "_blank";
         pubDate.innerHTML = '&nbsp;' + moment(items[i].getElementsByTagName('pubDate')[0].textContent).startOf('hour').fromNow();
-        anchor.appendChild(textnode);
+        anchor.innerHTML = items[i].getElementsByTagName('title')[0].textContent;
         newsList.appendChild(anchor);
         newsList.appendChild(pubDate);
         statusDiv.appendChild(newsList);

@@ -16,6 +16,9 @@ img{
     height:40px;
     width: 150px;
 }
+.newsList{
+    font-size: .8em;    
+}
 .newsList > span{
     font-size: small;
     color: #e80000;
